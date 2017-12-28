@@ -1,4 +1,4 @@
-import { CartItem } from "./cart-item.mode";
+import { CartItem } from "./cart-item.model";
 import { MenuItem } from "../menu-item/menu-item.model";
 
 export class ShoppingCartService {
@@ -26,6 +26,17 @@ export class ShoppingCartService {
         return this.items
             .map(item => item.value())
             .reduce((prev, value) => prev+value, 0);
+    }
+
+    increaseQty(item: CartItem) {
+      item.quantidade = item.quantidade + 1;
+    }
+
+    decreaseQty(item: CartItem) {
+      item.quantidade = item.quantidade - 1;
+      if (item.quantidade === 0) {
+        this.removeItem(item);
+      }
     }
 
 }
